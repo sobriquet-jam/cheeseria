@@ -1,0 +1,27 @@
+{
+  "name": "cheeseria",
+  "author": "Jennifer Anne Muirhead <jenniferannemuirhead@gmail.com>",
+  "version": "1.0.0",
+  "keywords": [],
+  "description": "",
+  "license": "UNLICENSED",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-openapi-validator": "^5.1.6"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.4",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.8",
+    "@types/uuid": "^9.0.8",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
