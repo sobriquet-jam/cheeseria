@@ -1,0 +1,38 @@
+[
+    {
+      "id": "1",
+      "name": "brie",
+      "description": "Tasty brie",
+      "price_per_kilo": 3.00,
+      "images": ["http://example.com/brie.jpg"]
+    },
+    {
+        "id": "2",
+        "name": "cheddar",
+        "description": "Tasty cheddar",
+        "price_per_kilo": 2.20,
+        "images": ["http://example.com/cheddar.jpg, http://example.com/cheddar3.jpg"]
+    },      
+    {
+      "id": "3",
+      "name": "ghouda",
+      "description": "Tasty ghouda",
+      "price_per_kilo": 4.15,
+      "images": ["http://example.com/ghouda-cheese.jpg"]
+    },
+    {
+      "id": "4",
+      "name": "blue cheese",
+      "description": "Salty and tangy blue cheese",
+      "price_per_kilo": 5.50,
+      "images": ["http://example.com/blue1.jpg", "http://example.com/blue2.jpg"]
+    },
+    {
+      "id": "5",
+      "name": "mozzarella",
+      "description": "Creamy and mild mozzarella",
+      "price_per_kilo": 3.75,
+      "images": ["http://example.com/mozzarella1.jpg", "http://example.com/mozzarella2.jpg"]
+    }
+  ]
+  
