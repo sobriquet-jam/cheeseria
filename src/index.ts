@@ -1,8 +1,8 @@
 import * as OpenApiValidator from "express-openapi-validator";
 import express, { Application, Request, Response } from "express";
-import path from "path";
-import fs from "fs";
-import { randomUUID } from 'crypto';
+import { randomUUID } from "crypto";
+import * as model from "./model";
+import { Cheese } from "./types";
 
 const PORT = 3000;
 
@@ -22,42 +22,11 @@ app.use(
   })
 );
 
-type Cheese = {
-  id: string;
-  name: string;
-  images: string[];
-  description: string;
-  pricePerKilo: number;
-};
-
-type CheeseRecord = {
-  id: string;
-  name: string;
-  images: string[];
-  description: string;
-  price_per_kilo: number;
-};
-
-// Read cheeses data from JSON file
-const cheesesData = fs.readFileSync(
-  path.join(__dirname, "cheeses.json"),
-  "utf8"
-);
-const cheeseRecords: CheeseRecord[] = JSON.parse(cheesesData);
-let cheeses: Cheese[] = cheeseRecords.map(
-  ({ id, name, images, description, price_per_kilo }) => ({
-    id,
-    name,
-    images,
-    description,
-    pricePerKilo: price_per_kilo,
-  })
-);
-
 // Get all cheeses
 app.get(
   "/cheeses",
   async (req: Request, res: Response): Promise<Response<Cheese[]>> => {
+    const cheeses = model.findAll();
     if (!cheeses) {
       return res.status(404).send({ message: "No cheeses to show" });
     }
@@ -70,7 +39,7 @@ app.get(
   "/cheeses/:id",
   async (req: Request<{ id: string }>, res: Response): Promise<Response> => {
     const cheeseId = req.params.id;
-    const cheese = cheeses.find((cheese) => cheese.id === cheeseId);
+    const cheese = model.getById(cheeseId);
 
     if (!cheese) {
       return res.status(404).send({ message: "Cheese not found" });
@@ -82,7 +51,7 @@ app.get(
 // Create a new cheese
 app.post("/cheeses", async (req: Request, res: Response): Promise<Response> => {
   try {
-    const newCheese: Cheese = {
+    const newCheese = model.create({
       id: randomUUID(),
       name: req.body.name,
       images: Array.isArray(req.body.images)
@@ -90,9 +59,7 @@ app.post("/cheeses", async (req: Request, res: Response): Promise<Response> => {
         : [req.body.images],
       description: req.body.description,
       pricePerKilo: req.body.price_per_kilo,
-    };
-
-    cheeses.push(newCheese);
+    });
 
     // Return the newly created cheese
     return res.status(201).json(newCheese);
@@ -104,10 +71,13 @@ app.post("/cheeses", async (req: Request, res: Response): Promise<Response> => {
 // Update a specific cheese by ID
 app.put(
   "/cheeses/:id",
-  async (req: Request<{ id: string }, undefined, Partial<Cheese>>, res: Response): Promise<Response> => {
+  async (
+    req: Request<{ id: string }, undefined, Partial<Cheese>>,
+    res: Response
+  ): Promise<Response> => {
     const cheeseId = req.params.id;
 
-    const cheese = getCheese(cheeseId);
+    const cheese = model.getById(cheeseId);
     if (!cheese) {
       return res.status(404).send({ message: "Cheese not found" });
     }
@@ -140,20 +110,17 @@ app.delete(
   "/cheeses/:id",
   async (req: Request<{ id: string }>, res: Response): Promise<Response> => {
     const cheeseId = req.params.id;
-    const cheese = getCheese(cheeseId);
-    if (!cheese) {
-      return res.status(404).send({ message: "Cheese not found" });
+    try {
+      model.deleteById(cheeseId);
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(404).send({ message: err?.message });
+      }
     }
-
-    cheeses = cheeses.filter((c) => c.id !== cheeseId);
 
     return res.status(204).send();
   }
 );
-
-function getCheese(cheeseId: string): Cheese | undefined {
-  return cheeses.find((cheese) => cheese.id === cheeseId);
-}
 
 // Start the server
 try {
