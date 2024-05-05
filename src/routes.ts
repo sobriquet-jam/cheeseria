@@ -49,7 +49,9 @@ routes.post(
       // Return the newly created cheese
       return res.status(201).json(newCheese);
     } catch (error) {
-      return res.status(500).json({ message: "Internal server error" });
+      return res
+        .status(400)
+        .json({ message: "Cheese information missing or invalid" });
     }
   }
 );
@@ -96,6 +98,19 @@ routes.delete(
   "/cheeses/:id",
   async (req: Request<{ id: string }>, res: Response): Promise<Response> => {
     const cheeseId = req.params.id;
+    if (cheeseId === "") {
+      return res.status(405).send({ message: "Must provide an ID" });
+    }
+
+    const falsyValuesMap: Record<string, boolean> = {
+      null: true,
+      undefined: true,
+    };
+
+    if (cheeseId in falsyValuesMap) {
+      return res.status(404).send({ message: "Not an accepted ID type" });
+    }
+
     try {
       model.deleteById(cheeseId);
     } catch (err) {
