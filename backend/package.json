@@ -1,5 +1,5 @@
 {
-  "name": "cheeseria",
+  "name": "cheeseria-backend",
   "author": "Jennifer Anne Muirhead <jenniferannemuirhead@gmail.com>",
   "version": "1.0.0",
   "keywords": [],
@@ -10,7 +10,7 @@
     "start": "nodemon src/index.ts",
     "build": "tsc",
     "seed": "ts-node src/seed.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
