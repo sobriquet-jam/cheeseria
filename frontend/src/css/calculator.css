@@ -2,7 +2,7 @@ h2 {
   padding: 1rem 0;
   font-size: 2.5rem;
   font-family: "Barrio", sans-serif;
-  color: #e7ca88;
+  color: #e7ad2a;
 }
 .calculator-card {
   background-color: white;
@@ -52,7 +52,6 @@ h2 {
 .controls button {
   border: none;
   font-size: 1.2rem;
-  background-color: #e7ca88;
   cursor: pointer;
   background-color: orange;
   padding: 0.5rem 1rem;
@@ -66,4 +65,14 @@ h2 {
 .decrement {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+}
+
+.divider {
+  border-top: 1px solid #e7ca88;
+}
+
+.total-price {
+  margin-top: 20px;
+  font-size: 1.3em;
+  font-weight: bold;
 }
