@@ -12,31 +12,34 @@ h2 {
 }
 
 .cheese {
-  margin-bottom: 10px;
-  padding: 10px;
   display: flex;
   justify-content: space-between;
+
+  margin-top: 0.5rem;
 }
 
 .cheese-info {
   text-align: left;
+
+  padding-left: 10px;
 }
 
 .cheese-name {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1rem;
   margin-bottom: 3px;
 }
 
-.price-per-kg {
-  font-size: 12px;
-  color: #888;
+.price-per-kilo {
+  font-size: 0.8rem;
+  color: #333;
   margin-bottom: 5px;
 }
 
 .price-selected {
   font-weight: bold;
   font-size: 1rem;
+  padding-right: 1rem;
 }
 
 .controls {
@@ -56,11 +59,11 @@ h2 {
 }
 
 .increment {
-  border-top-right-radius: 20px; /* Curved top right corner for the + button */
-  border-bottom-right-radius: 20px; /* Curved bottom right corner for the + button */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .decrement {
-  border-top-left-radius: 20px; /* Curved top left corner for the - button */
-  border-bottom-left-radius: 20px; /* Curved bottom left corner for the - button */
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }

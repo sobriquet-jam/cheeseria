@@ -5,17 +5,22 @@ import { Gallery } from './components/Gallery';
 import { Calculator } from './components/Calculator';
 import { Message } from './components/Message';
 
-const cheeses = [
-  { name: 'Brie', pricePerKg: 12.99, colorBubble: '#FFFACD' }, // Lemon Chiffon
-  { name: 'Cheddar', pricePerKg: 8.99, colorBubble: '#FAFAD2' }, // Light Goldenrod Yellow
-  { name: 'Gouda', pricePerKg: 10.49, colorBubble: '#FFFFE0' }, // Light Yellow
-  { name: 'Blue', pricePerKg: 15.99, colorBubble: '#FFDAB9' }, // Peachpuff
-  { name: 'Feta', pricePerKg: 9.49, colorBubble: '#F0FFF0' }, // Honeydew
-];
+import {
+
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+
+const queryClient = new QueryClient()
 
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
+       <ReactQueryDevtools initialIsOpen={true} />
     <div className="App">
       <header className="App-header">
         <Header />
@@ -23,13 +28,14 @@ function App() {
       <main className="main-content">
         <div className='left-content'>
           <Message />
-          <Gallery cheeses={cheeses} />
+          <Gallery />
         </div>
         <div className='right-content'>
-          <Calculator cheeses={cheeses} />
+          <Calculator />
         </div>
       </main>
     </div>
+    </QueryClientProvider>
   );
 }
 

@@ -2,7 +2,7 @@
   {
     "id": "31B92A90-6541-484D-8279-91F7771DB953",
     "name": "Brie",
-    "description": "Tasty brie",
+    "description": "Soft cow's milk cheese from Brie, France. Pale with slight gray under white mold. Creamy flavor, popular worldwide.",
     "pricePerKilo": 300,
     "images": ["http://example.com/brie-cheese.jpg"],
     "createdAt": "2023-01-05T15:10:00Z"
@@ -10,7 +10,7 @@
   {
     "id": "00DC3D57-8C91-47DC-987C-73E0BFEDDFB8",
     "name": "Cheddar",
-    "description": "Tasty cheddar",
+    "description": "Hard, off-white, sharp-tasting natural cheese. Originated in English village of Cheddar in Somerset.",
     "pricePerKilo": 220,
     "images": ["http://example.com/cheddar-cheese.jpg"],
     "createdAt": "2023-12-05T10:22:00Z"
@@ -18,15 +18,15 @@
   {
     "id": "95A3A3A9-3715-4D61-9F7C-C72AADA0B07C",
     "name": "Gouda",
-    "description": "Tasty gouda",
+    "description": "Mild, yellow cheese from cow's milk. Popular worldwide for rich, creamy texture and slightly sweet flavor.",
     "pricePerKilo": 415,
     "images": ["http://example.com/gouda-cheese.jpg"],
     "createdAt": "2022-06-06T10:10:00Z"
   },
   {
     "id": "832614A4-91B9-488F-BAC7-4ECD2228BD7A",
-    "name": "Blue cheese",
-    "description": "Salty and tangy blue cheese",
+    "name": "Blue",
+    "description": "General classification of cheeses with blue mold, spotted or veined. Distinct, tangy taste.",
     "pricePerKilo": 550,
     "images": ["http://example.com/blue1.jpg", "http://example.com/blue2.jpg"],
     "createdAt": "2021-11-05T10:25:25Z"
@@ -34,7 +34,7 @@
   {
     "id": "89E2C036-3862-485D-974D-8BFC24544457",
     "name": "Mozzarella",
-    "description": "Creamy and mild mozzarella",
+    "description": "Italian cheese from buffalo's milk. Received Traditional Specialities Guaranteed certification from EU.",
     "pricePerKilo": 375,
     "images": [
       "http://example.com/mozzarella1.jpg",

@@ -2,21 +2,21 @@ import React from 'react';
 
 interface CheeseItemProps {
   name: string;
-  pricePerKg: number;
+  pricePerKilo: number;
   quantity: number;
   onQuantityChange: (increment: number) => void;
 }
 
-export const CheeseItem: React.FC<CheeseItemProps> = ({ name, pricePerKg, quantity, onQuantityChange }) => {
+export const CheeseItem: React.FC<CheeseItemProps> = ({ name, pricePerKilo, quantity, onQuantityChange }) => {
   const calculatePrice = () => {
-    return (pricePerKg * quantity).toFixed(2);
+    return (pricePerKilo * quantity).toFixed(2);
   };
 
   return (
     <div className="cheese">
       <div className="cheese-info">
         <h3 className="cheese-name">{name}</h3>
-        <p className="price-per-kg">{pricePerKg} kg</p>
+        <p className="price-per-kilo">{pricePerKilo} kg</p>
       </div>
       <div className="price">
         <p className="price-selected">${calculatePrice()}</p>

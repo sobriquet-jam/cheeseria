@@ -12,10 +12,13 @@
   justify-content: center;
   align-items: center;
   background-color: #f0f0f0;
-  border: 1px solid #ccc;
   font-size: 24px;
   color: black;
-  radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
 }
 
 .large {
@@ -36,6 +39,8 @@
   height: 20%;
   width: 100%;
   background-color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .image {
@@ -43,25 +48,38 @@
   width: 100%;
   background-size: cover; /* Cover the entire container with the background image */
   background-position: center; /* Center the background image */
+  position: relative;
 }
 
 .image img {
   width: 100%; /* Ensure the image fills its container */
   height: 100%; /* Ensure the image fills its container */
   object-fit: cover; /* Make the image fit its container while preserving aspect ratio */
+  border-top-left-radius: 20px; /* Curved top left corner */
+  border-top-right-radius: 20px; /* Curved top right corner */
 }
 
 .info {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 
-.cheese-name {
+.info .cheese-name {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1rem;
+  padding: 0 1rem 1rem;
 }
 
-.price-per-kg {
-  font-size: 14px;
+.info .price-per-kilo {
+  font-size: 0.9rem;
+  color: #333;
+  padding: 0 1rem 1rem;
+}
+
+.bottom-section p {
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 1rem 0 0.3rem 0;
 }
 
 .colorBubble {
@@ -69,4 +87,124 @@
   height: 20px;
   border-radius: 50%;
   margin-top: 10px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Near opaque black */
+  display: none; /* Initially hidden */
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.image:hover .overlay {
+  display: flex;
+  color: white;
+  font-size: 18px;
+  border-radius: 20px 20px 0 0;
+}
+
+.image:hover .overlay p {
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 1006px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    grid-auto-flow: row;
+    grid-gap: 20px;
+  }
+
+  .large {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .info .cheese-name {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0 1rem 1rem;
+  }
+
+  .info .price-per-kilo {
+    font-size: 1.3rem;
+    color: #333;
+    padding: 0 1rem 1rem;
+  }
+
+  .bottom-section p {
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 1rem 0 0.3rem 0;
+  }
+}
+
+@media (max-width: 776px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: auto;
+    grid-auto-flow: row;
+    grid-gap: 20px;
+  }
+
+  .large {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .info .cheese-name {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0 1rem 1rem;
+  }
+
+  .info .price-per-kilo {
+    font-size: 1.3rem;
+    color: #333;
+    padding: 0 1rem 1rem;
+  }
+
+  .bottom-section p {
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 1rem 0 0.3rem 0;
+  }
+}
+
+@media (max-width: 486px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: auto;
+    grid-auto-flow: row;
+    grid-gap: 20px;
+  }
+
+  .large {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .info .cheese-name {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0 1rem 1rem;
+  }
+
+  .info .price-per-kilo {
+    font-size: 1.3rem;
+    color: #333;
+    padding: 0 1rem 1rem;
+  }
+
+  .bottom-section p {
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 1rem 0 0.3rem 0;
+  }
 }
