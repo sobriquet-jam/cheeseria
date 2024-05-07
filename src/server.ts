@@ -1,5 +1,5 @@
 import * as OpenApiValidator from "express-openapi-validator";
-import express, { Application } from "express";
+import express, { Application, Request, Response, NextFunction } from "express";
 import { routes } from "./routes";
 
 const apiSpec = "./src/openapi.yaml";

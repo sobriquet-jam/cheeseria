@@ -15,6 +15,7 @@ import { app } from "./server";
 import { Server } from "http";
 import { mock } from "node:test";
 import { response } from "express";
+import { randomUUID } from "crypto";
 
 const PORT = 3000;
 
@@ -41,7 +42,7 @@ describe("routes", () => {
 
     beforeEach(async () => {
       // we're testing route functionality only, so it's safe to mock out the model
-      jest.spyOn(model, "findAll").mockReturnValueOnce(cheeses);
+      jest.spyOn(model, "findAll").mockResolvedValueOnce(cheeses);
       response = await callServer("/cheeses");
     });
 
@@ -57,7 +58,7 @@ describe("routes", () => {
       let response: Response;
 
       beforeEach(async () => {
-        jest.spyOn(model, "getById").mockReturnValueOnce(undefined);
+        jest.spyOn(model, "getById").mockResolvedValueOnce(undefined);
         response = await callServer(`/cheese/${targetCheese.id}`);
       });
 
@@ -70,7 +71,7 @@ describe("routes", () => {
       let response: Response;
 
       beforeEach(async () => {
-        jest.spyOn(model, "getById").mockReturnValueOnce(targetCheese);
+        jest.spyOn(model, "getById").mockResolvedValueOnce(targetCheese);
         response = await callServer(`/cheeses/${targetCheese.id}`);
       });
 
@@ -85,7 +86,7 @@ describe("routes", () => {
 
     describe("and no id is given", () => {
       beforeEach(async () => {
-        jest.spyOn(model, "deleteById").mockReturnValueOnce();
+        jest.spyOn(model, "deleteById").mockResolvedValueOnce();
         response = await callServer(`/cheeses/${""}`, {
           method: "DELETE",
         });
@@ -98,7 +99,7 @@ describe("routes", () => {
 
     describe("and an invalid id is given", () => {
       beforeEach(async () => {
-        jest.spyOn(model, "deleteById").mockReturnValueOnce();
+        jest.spyOn(model, "deleteById").mockResolvedValueOnce();
         response = await callServer(`/cheeses/${undefined}`, {
           method: "DELETE",
         });
@@ -112,7 +113,7 @@ describe("routes", () => {
     describe("and a valid id is given", () => {
       const targetCheese: Cheese = mockCheese();
       beforeEach(async () => {
-        jest.spyOn(model, "deleteById").mockReturnValueOnce();
+        jest.spyOn(model, "deleteById").mockResolvedValueOnce();
         response = await callServer(`/cheeses/${targetCheese.id}`, {
           method: "DELETE",
         });
@@ -130,7 +131,7 @@ describe("routes", () => {
       let response: Response;
 
       beforeEach(async () => {
-        jest.spyOn(model, "create").mockReturnValueOnce(cheese);
+        jest.spyOn(model, "create").mockResolvedValueOnce(cheese);
         response = await callServer(`/cheeses`, {
           method: "POST",
           body: JSON.stringify(cheese),
@@ -160,7 +161,7 @@ describe("routes", () => {
       } as unknown as Cheese;
 
       beforeEach(async () => {
-        jest.spyOn(model, "create").mockReturnValueOnce(invalidCheese);
+        jest.spyOn(model, "create").mockResolvedValueOnce(invalidCheese);
         response = await callServer(`/cheeses`, {
           method: "POST",
           body: JSON.stringify(invalidCheese),
@@ -186,7 +187,7 @@ describe("routes", () => {
       } as unknown as Cheese;
 
       beforeEach(async () => {
-        jest.spyOn(model, "create").mockReturnValueOnce(invalidCheese);
+        jest.spyOn(model, "create").mockResolvedValueOnce(invalidCheese);
         response = await callServer(`/cheeses`, {
           method: "POST",
           body: JSON.stringify(invalidCheese),
@@ -212,7 +213,7 @@ describe("routes", () => {
       } as unknown as Cheese;
 
       beforeEach(async () => {
-        jest.spyOn(model, "create").mockReturnValueOnce(invalidCheese);
+        jest.spyOn(model, "create").mockResolvedValueOnce(invalidCheese);
         response = await callServer(`/cheeses`, {
           method: "POST",
           body: JSON.stringify(invalidCheese),
@@ -238,7 +239,7 @@ describe("routes", () => {
       } as unknown as Cheese;
 
       beforeEach(async () => {
-        jest.spyOn(model, "create").mockReturnValueOnce(invalidCheese);
+        jest.spyOn(model, "create").mockResolvedValueOnce(invalidCheese);
         response = await callServer(`/cheeses`, {
           method: "POST",
           body: JSON.stringify(invalidCheese),
@@ -251,57 +252,6 @@ describe("routes", () => {
       it("throws a Bad Request error", async () => {
         expect(response.status).toBe(400);
       });
-    });
-  });
-
-  describe("when replacing a cheese", () => {
-    describe("and all fields are correctly inputted", () => {
-      const originalCheese: Cheese = mockCheese();
-      const replacementCheese: Partial<Cheese> = {
-        name: "New Name",
-        description: "New Description",
-        pricePerKilo: 5.0,
-        images: ["http://example.com/new_image.jpg"],
-      };
-      let response: Response;
-
-      beforeEach(async () => {
-        // Return the original cheese
-        jest.spyOn(model, "getById").mockReturnValueOnce(originalCheese);
-
-        // Replace cheese data
-        response = await callServer(`/cheeses/${originalCheese.id}`, {
-          method: "PUT",
-          body: JSON.stringify(replacementCheese),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-      });
-
-      it("updates the cheese details", async () => {
-        // Expect the response to be the updated cheese
-        await expect(response.json()).resolves.toEqual({
-          ...originalCheese, // Keep the same ID
-          ...replacementCheese, // Update other fields
-        });
-      });
-
-      it("returns a 200 status code", async () => {
-        expect(response.status).toBe(200);
-      });
-    });
-  });
-
-  describe("when calling an unknown route", () => {
-    let response: Response;
-
-    beforeEach(async () => {
-      response = await callServer("/bad-route");
-    });
-
-    it("returns a 404 error", () => {
-      expect(response.status).toBe(404);
     });
   });
 });

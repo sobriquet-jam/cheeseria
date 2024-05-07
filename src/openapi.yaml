@@ -103,6 +103,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
           minLength: 2
@@ -119,6 +120,9 @@ components:
           minItems: 1
           items:
             type: string
+        createdAt:
+          type: string
+          format: date-time
   responses:
     # 404
     NotFound:

@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { randomUUID } from "crypto";
 import * as model from "./model";
 import { Cheese } from "./types";
+import { date } from "express-openapi-validator/dist/framework/base.serdes";
 
 const routes = Router();
 
@@ -9,7 +10,7 @@ const routes = Router();
 routes.get(
   "/cheeses",
   async (req: Request, res: Response): Promise<Response<Cheese[]>> => {
-    const cheeses = model.findAll();
+    const cheeses = await model.findAll();
     if (!cheeses) {
       return res.status(404).send({ message: "No cheeses to show" });
     }
@@ -22,7 +23,7 @@ routes.get(
   "/cheeses/:id",
   async (req: Request<{ id: string }>, res: Response): Promise<Response> => {
     const cheeseId = req.params.id;
-    const cheese = model.getById(cheeseId);
+    const cheese = await model.getById(cheeseId);
 
     if (!cheese) {
       return res.status(404).send({ message: "Cheese not found" });
@@ -36,22 +37,22 @@ routes.post(
   "/cheeses",
   async (req: Request, res: Response): Promise<Response> => {
     try {
-      const newCheese = model.create({
-        id: randomUUID(),
+      const newCheese = await model.create({
         name: req.body.name,
         images: Array.isArray(req.body.images)
           ? req.body.images
           : [req.body.images],
         description: req.body.description,
-        pricePerKilo: req.body.price_per_kilo,
+        pricePerKilo: req.body.pricePerKilo,
       });
 
       // Return the newly created cheese
       return res.status(201).json(newCheese);
     } catch (error) {
-      return res
-        .status(400)
-        .json({ message: "Cheese information missing or invalid" });
+      const message =
+        error instanceof Error ? error.message : "Error creating cheese";
+      console.error("Error creating cheese", error);
+      return res.status(500).json({ message });
     }
   }
 );
@@ -65,28 +66,33 @@ routes.put(
   ): Promise<Response> => {
     const cheeseId = req.params.id;
 
-    const cheese = model.getById(cheeseId);
+    const cheese = await model.getById(cheeseId);
     if (!cheese) {
-      return res.status(404).send({ message: "Cheese not found" });
+      return res
+        .status(404)
+        .send({ message: "No cheese matching the id provided" });
+    }
+
+    const { name, description, pricePerKilo, images } = req.body;
+
+    // Check for missing fields and update them if provided
+    const fieldsToUpdate: model.UpdateCheeseInput = {};
+    if (name) {
+      fieldsToUpdate["name"] = name;
+    }
+    if (description) {
+      fieldsToUpdate["description"] = description;
+    }
+    if (pricePerKilo) {
+      fieldsToUpdate["pricePerKilo"] = pricePerKilo;
+    }
+    if (images) {
+      fieldsToUpdate["images"] = images;
     }
 
     try {
-      const { name, description, pricePerKilo, images } = req.body;
-      if (name !== undefined) {
-        cheese.name = name;
-      }
-      if (description !== undefined) {
-        cheese.description = description;
-      }
-      if (pricePerKilo !== undefined) {
-        cheese.pricePerKilo = pricePerKilo;
-      }
-      if (images !== undefined) {
-        cheese.images = images;
-      }
-
-      // Return the updated cheese
-      return res.status(200).json(cheese);
+      model.updateCheese(cheeseId, fieldsToUpdate);
+      return res.status(202).json({ message: "Cheese updated successfully" });
     } catch (error) {
       return res.status(500).json({ message: "Internal server error" });
     }
@@ -112,7 +118,7 @@ routes.delete(
     }
 
     try {
-      model.deleteById(cheeseId);
+      await model.deleteById(cheeseId);
     } catch (err) {
       if (err instanceof Error) {
         return res.status(404).send({ message: err?.message });

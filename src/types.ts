@@ -4,4 +4,5 @@ export type Cheese = {
   images: string[];
   description: string;
   pricePerKilo: number;
+  createdAt: Date;
 };

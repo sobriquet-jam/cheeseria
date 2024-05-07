@@ -1,38 +1,45 @@
 [
-    {
-      "id": "1",
-      "name": "brie",
-      "description": "Tasty brie",
-      "price_per_kilo": 3.00,
-      "images": ["http://example.com/brie.jpg"]
-    },
-    {
-        "id": "2",
-        "name": "cheddar",
-        "description": "Tasty cheddar",
-        "price_per_kilo": 2.20,
-        "images": ["http://example.com/cheddar.jpg, http://example.com/cheddar3.jpg"]
-    },      
-    {
-      "id": "3",
-      "name": "ghouda",
-      "description": "Tasty ghouda",
-      "price_per_kilo": 4.15,
-      "images": ["http://example.com/ghouda-cheese.jpg"]
-    },
-    {
-      "id": "4",
-      "name": "blue cheese",
-      "description": "Salty and tangy blue cheese",
-      "price_per_kilo": 5.50,
-      "images": ["http://example.com/blue1.jpg", "http://example.com/blue2.jpg"]
-    },
-    {
-      "id": "5",
-      "name": "mozzarella",
-      "description": "Creamy and mild mozzarella",
-      "price_per_kilo": 3.75,
-      "images": ["http://example.com/mozzarella1.jpg", "http://example.com/mozzarella2.jpg"]
-    }
-  ]
-  
+  {
+    "id": "31B92A90-6541-484D-8279-91F7771DB953",
+    "name": "Brie",
+    "description": "Tasty brie",
+    "pricePerKilo": 300,
+    "images": ["http://example.com/brie-cheese.jpg"],
+    "createdAt": "2023-01-05T15:10:00Z"
+  },
+  {
+    "id": "00DC3D57-8C91-47DC-987C-73E0BFEDDFB8",
+    "name": "Cheddar",
+    "description": "Tasty cheddar",
+    "pricePerKilo": 220,
+    "images": ["http://example.com/cheddar-cheese.jpg"],
+    "createdAt": "2023-12-05T10:22:00Z"
+  },
+  {
+    "id": "95A3A3A9-3715-4D61-9F7C-C72AADA0B07C",
+    "name": "Gouda",
+    "description": "Tasty gouda",
+    "pricePerKilo": 415,
+    "images": ["http://example.com/gouda-cheese.jpg"],
+    "createdAt": "2022-06-06T10:10:00Z"
+  },
+  {
+    "id": "832614A4-91B9-488F-BAC7-4ECD2228BD7A",
+    "name": "Blue cheese",
+    "description": "Salty and tangy blue cheese",
+    "pricePerKilo": 550,
+    "images": ["http://example.com/blue1.jpg", "http://example.com/blue2.jpg"],
+    "createdAt": "2021-11-05T10:25:25Z"
+  },
+  {
+    "id": "89E2C036-3862-485D-974D-8BFC24544457",
+    "name": "Mozzarella",
+    "description": "Creamy and mild mozzarella",
+    "pricePerKilo": 375,
+    "images": [
+      "http://example.com/mozzarella1.jpg",
+      "http://example.com/mozzarella2.jpg"
+    ],
+    "createdAt": "2023-05-18T08:00:00Z"
+  }
+]
