@@ -1,0 +1,72 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 24px;
+  color: black;
+  radius: 20px;
+}
+
+.large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.small {
+  grid-column: span 1;
+}
+
+.top-section {
+  height: 80%;
+  width: 100%;
+}
+
+.bottom-section {
+  height: 20%;
+  width: 100%;
+  background-color: white;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  background-size: cover; /* Cover the entire container with the background image */
+  background-position: center; /* Center the background image */
+}
+
+.image img {
+  width: 100%; /* Ensure the image fills its container */
+  height: 100%; /* Ensure the image fills its container */
+  object-fit: cover; /* Make the image fit its container while preserving aspect ratio */
+}
+
+.info {
+  text-align: center;
+}
+
+.cheese-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.price-per-kg {
+  font-size: 14px;
+}
+
+.colorBubble {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-top: 10px;
+}

@@ -1,7 +1,8 @@
 import React from 'react';
+import '../css/header.css';
 
-export const TestHeader: React.FC = () => {
+export const Header: React.FC = () => {
     return (
-        <h2>Hello Home</h2>
+        <div className="header">PZ's Cheeseria</div>
     )
 }

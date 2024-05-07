@@ -1,0 +1,12 @@
+.header {
+  background-color: #e7ad2a;
+  min-height: 7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 3vmin);
+  color: white;
+  font-family: "Barrio", sans-serif;
+  font-size: 3rem;
+}
