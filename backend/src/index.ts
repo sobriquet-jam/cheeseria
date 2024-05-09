@@ -1,7 +1,6 @@
 import { app } from "./server";
-import { getDb, initDb } from "./db";
-
-const PORT = 3000;
+import { initDb } from "./db";
+import { API_HOST, API_PORT } from "./environment";
 
 async function start() {
   try {
@@ -9,8 +8,8 @@ async function start() {
     await initDb();
 
     // Start the server
-    app.listen(PORT, (): void => {
-      console.info(`Connected successfully on port ${PORT}`);
+    app.listen(API_PORT, (): void => {
+      console.info(`API server started on ${API_HOST}:${API_PORT}`);
     });
   } catch (err) {
     if (!(err instanceof Error)) {
