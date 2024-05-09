@@ -80,6 +80,14 @@ paths:
     delete:
       summary: Delete a specific cheese by ID
       operationId: DeleteCheeseById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+
       responses:
         204:
           description: Cheese was deleted

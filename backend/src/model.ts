@@ -14,13 +14,9 @@ type CheeseRecord = {
 export const TABLE_NAME = "cheeses";
 
 export async function findAll(): Promise<Cheese[]> {
-  try {
-    const db = await getDb();
-    const cheeses = await db(TABLE_NAME).select();
-    return cheeses.map(mapFromRecord);
-  } catch (error) {
-    throw new Error("Internal server error");
-  }
+  const db = await getDb();
+  const cheeses = await db(TABLE_NAME).select();
+  return cheeses.map(mapFromRecord);
 }
 
 export async function getById(id: string): Promise<Cheese | undefined> {

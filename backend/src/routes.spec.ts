@@ -22,9 +22,13 @@ const PORT = 3000;
 describe("routes", () => {
   let server: Server;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     // Spin up the server locally to test the routes
-    server = app.listen(PORT);
+    await new Promise((resolve) => {
+      server = app.listen(PORT, () => {
+        resolve(true);
+      });
+    });
   });
 
   beforeEach(() => {
@@ -105,8 +109,8 @@ describe("routes", () => {
         });
       });
 
-      it("the cheese will not be deleted", async () => {
-        expect(response.status).toBe(404);
+      it("should return a bad request error", async () => {
+        expect(response.status).toBe(400);
       });
     });
 
