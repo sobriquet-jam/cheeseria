@@ -1,10 +1,10 @@
 # Cheeseria API
 
-Backend for Cheeseria project
+Backend for Cheeseria project.
 
 ## Requirements
 
-- Node >=18
+- Node >= 18
 - Docker
 
 ## Installation / Development
